@@ -60,6 +60,15 @@ install_go() {
   echo "Go installation completed!"
 }
 
+install_k9s() {
+  echo "Installing k9s..."
+  git clone -b v0.40.10 https://github.com/derailed/k9s.git "$HOME/personal/k9s"
+  cd "$HOME/personal/k9s" || exit 1
+  make build
+  sudo mv ./execs/k9s /usr/local/bin/
+  sudo apt install kubectx # Installing kubectx and kubens
+}
+
 
 # Check for argument and execute corresponding function
 case "$1" in
@@ -75,11 +84,15 @@ case "$1" in
   tmux)
     setup_tmux
     ;;
+  k9s)
+    install_k9s
+    ;;
   all)
     setup_nvim
     setup_lazygit
     setup_tmux
     install_go
+    install_k9s
     ;;
   *)
     echo "Usage: $0 {nvim|lazygit|tmux}"
