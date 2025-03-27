@@ -95,7 +95,7 @@ case "$1" in
     install_k9s
     ;;
   *)
-    echo "Usage: $0 {nvim|lazygit|tmux}"
+    echo "Usage: $0 {nvim|lazygit|go|tmux|k9s}"
     exit 1
     ;;
 esac
